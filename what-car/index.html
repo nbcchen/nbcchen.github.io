@@ -14,12 +14,14 @@
 
 <body>
     <div id="app" class="container form-group">
+        <div class="row"><h1>What car{{ (parseInt(numCarsRequired) > 1 ? 's' : '') }} should I own?</h1></div>
         <div class="row">
             <label for="numCarsRequired">How many cars do you want?</label>
             <select class="form-control" v-model="numCarsRequired" name="numCarsRequired">
                 <option value="0" selected>0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
+                <option value="3">3</option>
             </select>
         </div>
         <div class="row" v-if="parseInt(numCarsRequired) > 1">
@@ -52,6 +54,15 @@
                 <option value="N">No</option>
             </select>
         </div>
+        <div class="row" v-if="parseInt(numCarsRequired) > 2">
+            <label>What's the purpose of a 3rd car?</label>
+            <select class="form-control" v-model="thirdCarPurpose" >
+                <option disabled>Select</option>
+                <option value="1">Off-roading</option>
+                <option value="2">Hobby car/track car</option>
+                <option value="3">Uber</option>
+            </select>
+        </div>
         <div class="row">
             <table class="table" v-if="parseInt(numCarsRequired) > 0">
                 <tbody>
@@ -70,6 +81,15 @@
                             <figure>
                                 <img v-bind:src="cars[result.winterCar].image" />
                                 <figcaption>{{cars[result.winterCar].name}}</figcaption>
+                            </figure>
+                        </td>
+                    </tr>
+                    <tr v-if="result.thirdCar">
+                        <td>3rd car</td>
+                        <td>
+                            <figure>
+                                <img v-bind:src="cars[result.thirdCar].image" />
+                                <figcaption>{{cars[result.thirdCar].name}}</figcaption>
                             </figure>
                         </td>
                     </tr>
@@ -113,11 +133,20 @@
                 name: 'Subaru Ascent',
                 image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Subaru_Ascent_IMG_3632.jpg/420px-Subaru_Ascent_IMG_3632.jpg'
             },
+            wrangler: {
+                name: 'Jeep Wrangler',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/2018_Jeep_Wrangler_Sahara_Unlimited_Multijet_2.1_Front.jpg/280px-2018_Jeep_Wrangler_Sahara_Unlimited_Multijet_2.1_Front.jpg'
+            },
+            wrx: {
+                name: 'Subaru WRX',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/2022_Subaru_WRX_GT_in_Ceramic_White%2C_front_left_%28NYIAS_2022%29.jpg/280px-2022_Subaru_WRX_GT_in_Ceramic_White%2C_front_left_%28NYIAS_2022%29.jpg'
+            }
         };
         new Vue({
             el: '#app',
             data() {
                 return {
+                    thirdCarPurpose: undefined,
                     isNorthernNewEngland: undefined,
                     numCarsRequired: 0,
                     hasHomeCharging: undefined,
@@ -129,10 +158,13 @@
             },
             computed: {
                 result() {
+                    /**
+                     * @type {{ thirdCar: string; winterCar: string; dailyDriver: string }}
+                     */ 
                     let result = {
                         dailyDriver: 'rav4'
                     };
-                    if (parseInt(this.numCarsRequired) === 2) {
+                    if (parseInt(this.numCarsRequired) >= 2) {
                         if (this.isNorthernNewEngland === 'Y') {
                             result.winterCar = (this.children > 2) ? 'ascent' : 'outback';
                         }
@@ -146,6 +178,24 @@
                             result.dailyDriver = 'priusPrime';
                         }
                         else result.dailyDriver = 'corolla';
+
+                        if (parseInt(this.numCarsRequired) === 3) {
+                            switch(this.thirdCarPurpose){
+                                case '1': result.thirdCar = 'wrangler'; break;
+                                case '2': result.thirdCar = 'wrx'; break;
+                                case '3': 
+                                    if (result.dailyDriver !== 'rav4' && result.winterCar !== 'rav4')
+                                        result.thirdCar = 'rav4';
+                                    else if (result.dailyDriver !== 'priusPrime')
+                                        result.thirdCar = 'priusPrime';
+                                    else if (result.dailyDriver !== 'corolla')
+                                        result.thirdCar = 'corolla';
+                                    else if (result.dailyDriver !== 'model3')
+                                        result.thirdCar = 'model3';
+                                    else if (result.winterCar !== 'sienna')
+                                        result.thirdCar = 'sienna';
+                            }
+                        }
                     }
                     return result;
                 }
