@@ -33,6 +33,10 @@ const vueApp = {
                 {
                     name: 'Egg salad',
                     url: 'https://th.bing.com/th?id=OSK.HEROvTqv4m2tnGKSt4gHgKAR4k9Zj-QLdImL-zJyKrarEo4&w=472&h=280&c=13&rs=2&o=6&pid=SANGAM'
+                },
+                {
+                    name: 'TÖST Non-Alcoholic Sparkling Beverage',
+                    url: 'https://images.food52.com/4Ju3D3vbcH8upDmCZ5ApGjNLXDg=/1500x1500/78dbbb30-0301-4af6-9210-9ae6f4a8fdae--2021-0504_tost_non-alcoholic-sparkling-beverage_family_silo_ty-mecham.jpg'
                 }
             ],
         };

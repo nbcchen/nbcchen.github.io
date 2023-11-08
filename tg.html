@@ -2,22 +2,25 @@
 <html lang="en">
 
 <head>
-    <title>Tiffany's Thanksgiving menu</title>
+    <meta charset="UTF-8"/>
+    <title> Tiffany's Thanksgiving menu</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cerulean/bootstrap.min.css">
 </head>
 
 <body class="container">
     <h1>Thanksgiving menu</h1>
     <div id="app">
-        <div v-if="!authenticationInitiated">
-            <input v-model="passcode" placeholder="Your passcode" />
-            <button @click="viewMenu" class="btn btn-primary" v-show="passcode.length >= 1">View menu</button>
+        <div v-if="!authenticationInitiated" class="form-group">
+            <label>Type in your passcode to access the menu</label>
+            <input v-model="passcode" placeholder="Your passcode" type="password" class="form-control"/>
+            <small>The menu will be public on Thanksgiving week</small>
+            <button @click="viewMenu" class="btn btn-primary form-control" v-show="passcode.length >= 1">View menu</button>      
         </div>
         <div v-if="authenticationInitiated">
             <ul class="list-group" v-if=" hasAccess || isThxGivingWeek">
                 <li v-for="entry in menu" class="list-group-item">
                     <figure>
-                        <img v-bind:src="entry.url" />
+                        <img v-bind:src="entry.url" style="max-width: 200px; max-height: 400px;" />
                         <figcaption>
                             <a v-if="entry.wikiLink" v-bind:href="entry.wikiLink" target="_blank">{{entry.name}}</a>
                             <span v-else>{{entry.name}}</span>
