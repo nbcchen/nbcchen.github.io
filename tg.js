@@ -1,7 +1,7 @@
 const pphrases = [
     'tiffany',
-    'f865426b-35b4-42ab-8eb9-e4b4fa39da14',
-    '4bace723-1e65-463a-aebe-dcdc8a1cec6f',
+    'f865426b',
+    '4bace723',
     'david'
 ];
 const vueApp = {
