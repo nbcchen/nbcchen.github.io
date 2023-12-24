@@ -6,7 +6,7 @@ const minsEl = document.getElementById("mins");
 const secondsEl = document.getElementById("seconds");
 
 const newYear = new Date().getFullYear();
-const newYearTime = new Date(`December 24 ${newYear} 17:30:00`);
+const newYearTime = new Date(`December 24 ${newYear} 17:50:00`);
 
 newYearEl.innerHTML = newYear;
 
