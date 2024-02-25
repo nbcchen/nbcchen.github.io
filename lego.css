@@ -14,3 +14,7 @@ body {
     margin-top: 20px;
     width: 100px;
 }
+
+.thicc { font-weight: bold; }
+
+#gaugeValue { display: none }
