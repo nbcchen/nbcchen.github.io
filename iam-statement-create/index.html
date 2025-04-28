@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IAM Statement Creator</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+    <link href="iam.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="bg-light">
+    <div id="app" class="container">
+        <form @submit.prevent="handleSubmit" class="p-3 bg-white shadow-sm rounded">
+            <h3 class="mb-3">Terraform IAM Statement Creator</h3>
+            <div class="mb-3">
+                <label for="textarea1" class="form-label">Permissions:</label>
+                <textarea id="textarea1" v-model="permissions" @change="updatePermissions" class="form-control"
+                    rows="3"></textarea>
+
+            </div>
+            <div v-if="permissions && !warning" class="mb-3">
+                <label class="form-label">Effect (optional):</label>
+                <div class="form-check">
+                    <input type="radio" id="allow" value="ALLOW" v-model="effect" class="form-check-input" checked>
+                    <label for="allow" class="form-check-label">ALLOW</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="deny" value="DENY" v-model="effect" class="form-check-input">
+                    <label for="deny" class="form-check-label">DENY</label>
+                </div>
+            </div>
+            <div class="text-muted mb-3">
+                By clicking "Submit", we will check
+                <ul>
+                    <li>If the input is a valid string array with more than 1 permission</li>
+                    <li>If effect is <code>ALLOW</code>, these items are not in the permissions:
+                        <ul>
+                            <li><code>iam:*</code></li>
+                            <li><code>*</code></li>
+                            <li><code>*:*</code></li>
+                        </ul>
+                    </li>
+                    <li>Every permission contains a colon (<code>:</code>)</li>
+                    <li>No duplicated permissions found <span class="text-danger">(beta)</span></li>
+                </ul>
+            </div>
+            <div class="btn-group" role="group">
+                <button type="submit" v-if="permissions && !warning" class="btn btn-primary">Submit</button>
+                <button type="button" v-if="permissions && code && !warning" class="btn" @click="copyCode">Copy code to
+                    clipboard</button>
+            </div>
+            <div>
+                <a target="_blank"
+                    href="https://registry.terraform.io/providers/hashicorp/aws/3.9.0/docs/data-sources/iam_policy_document#actions-1">Documentation</a>
+            </div>
+        </form>
+
+        <div class="code-container">
+            <div v-if="permissions && !warning">
+                <textarea readonly class="form-control" rows="10" id="canvas">
+                    {{ code }}
+                </textarea>
+            </div>
+            <div v-else-if="warning" class="text-danger">
+                <code>{{ warning }}</code>
+            </div>
+        </div>
+    </div>
+
+    <script src="iam.js"></script>
+</body>
+
+</html>
