@@ -17,6 +17,7 @@
             <h3 class="mb-3">Terraform IAM Statement Creator</h3>
             <div class="mb-3">
                 <label for="textarea1" class="form-label">Permissions:</label>
+                <div>Example: <code>["ec2:RunInstances", "ec2:TerminateInstances", "ec2:DescribeInstances"]</code></div>
                 <textarea id="textarea1" v-model="permissions" @change="updatePermissions" class="form-control"
                     rows="3"></textarea>
 
