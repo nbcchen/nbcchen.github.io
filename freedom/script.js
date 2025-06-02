@@ -5,6 +5,8 @@ const totalDays = Math.round(Math.abs(lastDay.getTime() - firstDay.getTime()) / 
 const daysPassed = Math.round(Math.abs(today.getTime() - firstDay.getTime()) / (1000 * 60 * 60 * 24));
 const totalHours =  Math.round(Math.abs(lastDay.getTime() - firstDay.getTime()) / (1000 * 60 * 60));
 const hoursPassed = Math.round(Math.abs(today.getTime() - firstDay.getTime()) / (1000 * 60 * 60));
+const weeksPassed = Math.round((today - firstDay) / (7 * 24 * 60 * 60 * 1000));
+const totalWeeks = Math.round((lastDay - firstDay) / (7 * 24 * 60 * 60 * 1000));
 const monthsPassed = today.getMonth() - firstDay.getMonth() + 12 * (today.getFullYear() - firstDay.getFullYear());
 const totalMonths = lastDay.getMonth() - firstDay.getMonth() + 12 * (today.getFullYear() - firstDay.getFullYear());
 
@@ -14,6 +16,8 @@ document.getElementById('months-passed').innerText = monthsPassed;
 document.getElementById('months-total').innerText = totalMonths;
 document.getElementById('hours-passed').innerText = hoursPassed;
 document.getElementById('hours-total').innerText = totalHours;
+document.getElementById('weeks-passed').innerText = weeksPassed;
+document.getElementById('weeks-total').innerText = totalWeeks;
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -28,6 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             name: "Days passed",
             progress: 100 * (daysPassed / totalDays),
+        },
+        {
+            name: "Weeks passed",
+            progress: 100 * (weeksPassed / totalWeeks),
         },
         {
             name: "Months passed",
