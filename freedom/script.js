@@ -3,6 +3,8 @@ const firstDay = new Date('2025-05-23T11:14:00Z');
 const lastDay = new Date('2025-11-03T07:00:00Z');
 const totalDays = Math.round(Math.abs(lastDay.getTime() - firstDay.getTime()) / (1000 * 60 * 60 * 24));
 const daysPassed = Math.round(Math.abs(today.getTime() - firstDay.getTime()) / (1000 * 60 * 60 * 24));
+const totalHours =  Math.round(Math.abs(lastDay.getTime() - firstDay.getTime()) / (1000 * 60 * 60));
+const hoursPassed = Math.round(Math.abs(today.getTime() - firstDay.getTime()) / (1000 * 60 * 60));
 const monthsPassed = today.getMonth() - firstDay.getMonth() + 12 * (today.getFullYear() - firstDay.getFullYear());
 const totalMonths = lastDay.getMonth() - firstDay.getMonth() + 12 * (today.getFullYear() - firstDay.getFullYear());
 
@@ -10,6 +12,8 @@ document.getElementById('days-passed').innerText = daysPassed;
 document.getElementById('days-total').innerText = totalDays;
 document.getElementById('months-passed').innerText = monthsPassed;
 document.getElementById('months-total').innerText = totalMonths;
+document.getElementById('hours-passed').innerText = hoursPassed;
+document.getElementById('hours-total').innerText = totalHours;
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -17,6 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
     listaProgresso.innerHTML = '';
 
     const data = [
+        {
+            name: 'Hours passed',
+            progress: 100 * (hoursPassed/totalHours),
+        },
         {
             name: "Days passed",
             progress: 100 * (daysPassed / totalDays),
