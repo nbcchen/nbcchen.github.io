@@ -1,10 +1,10 @@
 const today = new Date();
 const firstDay = new Date('2025-05-23T11:14:00Z');
-const lastDay = new Date('2025-11-03T07:00:00Z');
+const lastDay = new Date('2025-11-03T06:14:00Z');
 const totalDays = Math.round(Math.abs(lastDay.getTime() - firstDay.getTime()) / (1000 * 60 * 60 * 24));
-const daysPassed = Math.round(Math.abs(today.getTime() - firstDay.getTime()) / (1000 * 60 * 60 * 24));
-const totalHours =  Math.round(Math.abs(lastDay.getTime() - firstDay.getTime()) / (1000 * 60 * 60));
-const hoursPassed = Math.round(Math.abs(today.getTime() - firstDay.getTime()) / (1000 * 60 * 60));
+const daysPassed = (Math.abs(today.getTime() - firstDay.getTime()) / (1000 * 60 * 60 * 24)).toFixed(1);
+const totalHours =  (Math.abs(lastDay.getTime() - firstDay.getTime()) / (1000 * 60 * 60));
+const hoursPassed = (Math.abs(today.getTime() - firstDay.getTime()) / (1000 * 60 * 60)).toFixed(1);
 const weeksPassed = Math.round((today - firstDay) / (7 * 24 * 60 * 60 * 1000));
 const totalWeeks = Math.round((lastDay - firstDay) / (7 * 24 * 60 * 60 * 1000));
 const monthsPassed = today.getMonth() - firstDay.getMonth() + 12 * (today.getFullYear() - firstDay.getFullYear());
