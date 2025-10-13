@@ -1,6 +1,6 @@
 const today = new Date();
 const firstDay = new Date('2025-05-23T11:14:00Z');
-const lastDay = new Date('2025-11-03T06:14:00Z');
+const lastDay = new Date('2025-11-03T04:35:00Z'); // 6:35 but arrive 2 hours prior
 const totalDays = Math.round(Math.abs(lastDay.getTime() - firstDay.getTime()) / (1000 * 60 * 60 * 24));
 const daysPassed = (Math.abs(today.getTime() - firstDay.getTime()) / (1000 * 60 * 60 * 24)).toFixed(1);
 const totalHours =  (Math.abs(lastDay.getTime() - firstDay.getTime()) / (1000 * 60 * 60));
@@ -81,3 +81,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 });
+
