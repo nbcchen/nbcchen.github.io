@@ -1,5 +1,7 @@
 const okayBtn = document.querySelector('#disclaimerButton');
-okayBtn.addEventListener('click', hide);
+okayBtn.addEventListener('click', () => {
+    window.location.href = 'dice.html';
+});
 
 window.addEventListener('click', function(e){   
     if (document.getElementsByClassName('disclaimer-window')[0].contains(e.target)){
@@ -9,13 +11,6 @@ window.addEventListener('click', function(e){
       sessionStorage.setItem('alreadyClicked', "y");
     }
   });
-  
-function hide(){
-    document.getElementsByClassName('disclaimer-window')[0].style.animation = "fadeOut 500ms";
-    setTimeout(() => document.getElementsByClassName('disclaimer-window')[0].style.display = "none", 450);
-    setTimeout(() => document.getElementsByClassName('disclaimer-container')[0].style.display = "none", 550);
-    sessionStorage.setItem('alreadyClicked', "y");
-}
 
 function check(){
   sessionStorage.setItem('alreadyClicked', "n");
