@@ -38,6 +38,8 @@ function diceAction() {
     : (diceOneSix.style.zIndex = "0");
 
   document.getElementsByClassName("spinner")[0].style.display = "block";
+  document.getElementById("result").innerHTML = "";
+  document.getElementById("result").style.border = "none";
   setTimeout(() => {
     document.getElementsByClassName("spinner")[0].style.display = "none";
     document.getElementById("result").innerHTML = `<h2 class="result">${diceResults[diceOne - 1]
