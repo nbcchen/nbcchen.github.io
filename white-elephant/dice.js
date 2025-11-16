@@ -1,11 +1,11 @@
 const btnDice = document.querySelector(".button");
 const diceResults = [
-  "PASS GIFTS LEFT",
-  "TRADE YOUR GIFT WITH SOMEONE",
-  "MAKE 2 PEOPLE SWAP GIFTS",
-  "STEAL ANY GIFT",
-  "KEEP YOUR GIFT",
-  "EVERYONE PASS GIFTS RIGHT",
+  "PASS GIFTS LEFT ⬅️",
+  "TRADE YOUR GIFT WITH SOMEONE 🔄",
+  "MAKE 2 PEOPLE SWAP GIFTS 🔁",
+  "STEAL ANY GIFT 🥷",
+  "KEEP YOUR GIFT 🎁",
+  "EVERYONE PASS GIFTS RIGHT ➡️",
 ];
 
 function diceAction() {
@@ -37,10 +37,13 @@ function diceAction() {
     ? (diceOneSix.style.zIndex = "1")
     : (diceOneSix.style.zIndex = "0");
 
-  document.getElementById("result").innerHTML = `<h2 class="result">${
-    diceResults[diceOne - 1]
-  }</h2>`;
-  document.getElementById("result").style.border = "2px solid white";
+  document.getElementsByClassName("spinner")[0].style.display = "block";
+  setTimeout(() => {
+    document.getElementsByClassName("spinner")[0].style.display = "none";
+    document.getElementById("result").innerHTML = `<h2 class="result">${diceResults[diceOne - 1]
+      }</h2>`;
+    document.getElementById("result").style.border = "2px solid white";
+  }, 1500);
 }
 
 btnDice.addEventListener("click", diceAction);
